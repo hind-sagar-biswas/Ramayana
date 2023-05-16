@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QLabel
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtCore import Qt
 from Verse import Verse
 from Form import Form
@@ -46,6 +46,8 @@ class App(QMainWindow):
         self.verse_widget = None
 
         self.setWindowTitle(self.title)
+        icon = QIcon("./images/favicon.ico")
+        self.setWindowIcon(icon)
         self.setGeometry(self.ui.x, self.ui.y, self.ui.width, self.ui.height)
         self.set_window()
     
