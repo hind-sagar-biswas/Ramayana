@@ -1,0 +1,1 @@
+subprocess.run(["python", "-u", "main.py"], shell=True)

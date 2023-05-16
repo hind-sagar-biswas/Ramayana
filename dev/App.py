@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QLabel
 from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtCore import Qt
+from Bookmark import Bookmark
 from Verse import Verse
 from Form import Form
 from Ui import UI
@@ -10,6 +11,7 @@ class App(QMainWindow):
         super().__init__()
 
         self.ui = UI()
+        self.bookmark = Bookmark()
         self.title = 'Valmiki Ramayana'
         self.colors = self.ui.colors
         self.kandas = {
@@ -64,9 +66,7 @@ class App(QMainWindow):
         self.central_widget.setLayout(self.central_layout)
         self.setCentralWidget(self.central_widget)
 
-        self.form.select_kanda()
-        self.form.select_sarga()
-        self.form.select_verse()
+        self.form.open_last_read()
         return
     
     def get_banner(self):

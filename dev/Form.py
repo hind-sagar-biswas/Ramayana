@@ -97,19 +97,40 @@ class Form(QWidget):
         self.verse_select.setMaximum(len(self.app.selected_sarga))
         self.verse_select_label.setText(f'VERSE ({len(self.app.selected_sarga)}): ')
 
+        self.verse_select.setValue(1)
+        self.select_verse()
+
     def select_verse(self):
         verse = int(self.verse_select.text()) - 1
         self.app.selected_verse = self.app.selected_sarga[verse]
         self.app.selected_verse_number = verse
 
+        self.app.bookmark.update_last_read(
+            self.app.selected_kanda,
+            self.app.selected_sarga_number + 1,
+            self.app.selected_verse_number + 1
+        )
+
         self.app.update_window()
+
+    def open_last_read(self):
+        kanda, sarga, verse = self.app.bookmark.get_last_read()
+        kanda_index = list(self.app.kandas.keys()).index(kanda)
+
+        self.kanda_select.setCurrentIndex(kanda_index)
+        self.select_kanda()
+
+        self.sarga_select.setValue(sarga)
+        self.select_sarga()
+
+        self.verse_select.setValue(verse)
+        self.select_verse()
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key_Right:
             if (int(self.verse_select.text()) == len(self.app.selected_sarga)):
                 self.sarga_select.setValue(int(self.sarga_select.text()) + 1)
                 self.select_sarga()
-                self.verse_select.setValue(1)
             else:
                 self.verse_select.setValue(int(self.verse_select.text()) + 1)
             self.select_verse()
@@ -120,6 +141,5 @@ class Form(QWidget):
                 self.verse_select.setValue(len(self.app.selected_sarga))
             else:
                 self.verse_select.setValue(int(self.verse_select.text()) - 1)
-            self.select_verse()
 
         super().keyPressEvent(event)

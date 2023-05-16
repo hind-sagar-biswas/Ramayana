@@ -67,6 +67,3 @@ class Bookmark():
         self.write_content(self.last_read_file, self.last_read)
         self.write_content(self.bookmarks_file, "\n".join(self.bookmarks))
         return
-    
-book = Bookmark()
-book.add()
