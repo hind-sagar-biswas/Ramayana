@@ -1,7 +1,7 @@
 import os
 import json
-from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QComboBox, QSplitter, QSpinBox
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QComboBox, QSplitter, QSpinBox, QScrollArea
 
 
 class Form(QWidget):
@@ -34,8 +34,8 @@ class Form(QWidget):
         sections = 3
         widgets = [
             [self.kanda_select_label, self.kanda_select],
-            [self.sarga_select_label, self.sarga_select, self.sarga_select_button],
-            [self.verse_select_label, self.verse_select, self.verse_select_button]
+            [self.sarga_select_label, self.sarga_select],
+            [self.verse_select_label, self.verse_select]
         ]
         form_widget = self.split(sections, widgets)
         form_widget.setStyleSheet(f'background: {self.app.colors["sub"]};' 'border-radius: 10px;')
@@ -57,52 +57,38 @@ class Form(QWidget):
         self.kanda_select_label = QLabel('KANDA:', self)
         self.kanda_select = QComboBox(self)
         self.kanda_select.setStyleSheet(
-                                            f'background-color: {self.app.colors["light"]};' 
-                                            f'color: {self.app.colors["dark"]};'
-                                            'border: none;'
-                                            'padding: 10px;'
-                                            'border-radius: 5px;'
-                                        )
+            f'background-color: {self.app.colors["light"]};' 
+            f'color: {self.app.colors["dark"]};'
+            'border: none;'
+            'padding: 10px;'
+            'border-radius: 5px;'
+        )
         for kanda in self.app.kandas:
             self.kanda_select.addItem(kanda)
         
         self.kanda_select.currentIndexChanged.connect(self.select_kanda)
         ## SARGA
         self.sarga_select = self.spin_box_widget()
+        self.sarga_select.valueChanged.connect(self.select_sarga)
         self.sarga_select.setStyleSheet(
-                                            f'background-color: {self.app.colors["light"]};' 
-                                            f'color: {self.app.colors["dark"]};'
-                                            'border: none;'
-                                            'padding: 10px;'
-                                            'border-radius: 5px;'
-                                        )
+            f'background-color: {self.app.colors["light"]};' 
+            f'color: {self.app.colors["dark"]};'
+            'border: none;'
+            'padding: 10px;'
+            'border-radius: 5px;'
+        )
         self.sarga_select_label = QLabel('SARGA:', self)
-        self.sarga_select_button = QPushButton('SELECT', self)
-        self.sarga_select_button.setStyleSheet(
-                                            f'background: {self.app.colors["sub_light"]};'
-                                            'border: none;'
-                                            'padding: 10px;'
-                                            'border-radius: 5px;'
-                                        )
-        self.sarga_select_button.clicked.connect(self.select_sarga)
         ## VERSE
         self.verse_select = self.spin_box_widget()
+        self.verse_select.valueChanged.connect(self.select_verse)
         self.verse_select.setStyleSheet(
-                                            f'background-color: {self.app.colors["light"]};' 
-                                            f'color: {self.app.colors["dark"]};'
-                                            'border: none;'
-                                            'padding: 10px;'
-                                            'border-radius: 5px;'
-                                        )
+            f'background-color: {self.app.colors["light"]};' 
+            f'color: {self.app.colors["dark"]};'
+            'border: none;'
+            'padding: 10px;'
+            'border-radius: 5px;'
+        )
         self.verse_select_label = QLabel('VERSE:', self)
-        self.verse_select_button = QPushButton('SELECT', self)
-        self.verse_select_button.setStyleSheet(
-                                            f'background: {self.app.colors["sub_light"]};'
-                                            'border: none;'
-                                            'padding: 10px;'
-                                            'border-radius: 5px;'
-                                        )
-        self.verse_select_button.clicked.connect(self.select_verse)
 
     
         form = self.form_widget()
@@ -139,3 +125,23 @@ class Form(QWidget):
         self.app.selected_verse_number = verse
 
         self.app.update_window()
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_Right:
+            if (int(self.verse_select.text()) == len(self.app.selected_sarga)):
+                self.sarga_select.setValue(int(self.sarga_select.text()) + 1)
+                self.select_sarga()
+                self.verse_select.setValue(1)
+            else:
+                self.verse_select.setValue(int(self.verse_select.text()) + 1)
+            self.select_verse()
+        elif event.key() == Qt.Key_Left:
+            if (int(self.verse_select.text()) == 1):
+                self.sarga_select.setValue(int(self.sarga_select.text()) - 1)
+                self.select_sarga()
+                self.verse_select.setValue(len(self.app.selected_sarga))
+            else:
+                self.verse_select.setValue(int(self.verse_select.text()) - 1)
+            self.select_verse()
+
+        super().keyPressEvent(event)

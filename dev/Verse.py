@@ -64,4 +64,6 @@ class Verse(QWidget):
         self.verse.setText(f'{sloka}')
         self.pratipadam.setText(f'{pratipada}')
         self.tat.setText(f'{tat}')
-
+        
+        self.pratipadam.setWordWrap(True)
+        self.tat.setWordWrap(True)

@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget
+from PyQt5.QtCore import Qt
 from Verse import Verse
 from Form import Form
 
@@ -49,15 +50,22 @@ class App(QMainWindow):
 
         self.setWindowTitle(self.title)
         self.setGeometry(50, 50, 800, 200)
+        self.setStyleSheet(
+            "max-width: 900px;"
+        )
         self.set_window()
     
     def set_window(self):
         self.form = Form(self)
         self.central_widget = QWidget()
+
         self.central_layout = QVBoxLayout()
+        self.central_layout.setAlignment(Qt.AlignTop)
         self.central_layout.addWidget(self.form)
+
         self.central_widget.setLayout(self.central_layout)
         self.setCentralWidget(self.central_widget)
+        self.central_layout.addStretch()
 
         self.form.select_kanda()
         self.form.select_sarga()
