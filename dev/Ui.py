@@ -47,7 +47,7 @@ class UI(QWidget):
                 font.setPointSize(14)
         return font
     
-    def split(self, sections, sections_widgets, mode = "ltr"):
+    def split(self, sections, sections_widgets, mode = "ltr", section_styles = None, ratio = None):
         splitter = QSplitter()
         splitter.setHandleWidth(1)
         
@@ -59,9 +59,13 @@ class UI(QWidget):
             for widget in sections_widgets[i]:
                 layout.addWidget(widget)
             
+            if ratio == None: r = 1
+            else: r = ratio[i]
             splitter.addWidget(QWidget())
-            splitter.setStretchFactor(i, 1)
+            splitter.setStretchFactor(i, r)
             splitter.widget(i).setLayout(layout)
+            if section_styles != None:
+                splitter.widget(i).setStyleSheet(f"QWidget {{ {section_styles[i]} }}")
         
         return splitter
     

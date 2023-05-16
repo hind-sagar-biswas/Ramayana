@@ -20,7 +20,7 @@ class Form(QWidget):
             [self.verse_select_label, self.verse_select]
         ]
         form_widget = self.ui.split(sections, widgets)
-        form_widget.setStyleSheet(f'background: {self.app.colors["sub"]};' 'border-radius: 10px;')
+        form_widget.setStyleSheet(f'background: {self.ui.colors["sub"]};' 'border-radius: 10px;')
         return form_widget
 
     def set_window(self):
@@ -33,8 +33,8 @@ class Form(QWidget):
         self.kanda_select = QComboBox(self)
         self.kanda_select.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.kanda_select.setStyleSheet(
-            f'background-color: {self.app.colors["light"]};' 
-            f'color: {self.app.colors["dark"]};'
+            f'background-color: {self.ui.colors["light"]};' 
+            f'color: {self.ui.colors["dark"]};'
             'border: none;'
             'padding: 10px;'
             'border-radius: 5px;'
@@ -48,8 +48,8 @@ class Form(QWidget):
         self.sarga_select.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.sarga_select.valueChanged.connect(self.select_sarga)
         self.sarga_select.setStyleSheet(
-            f'background-color: {self.app.colors["light"]};' 
-            f'color: {self.app.colors["dark"]};'
+            f'background-color: {self.ui.colors["light"]};' 
+            f'color: {self.ui.colors["dark"]};'
             'border: none;'
             'padding: 10px;'
             'border-radius: 5px;'
@@ -60,8 +60,8 @@ class Form(QWidget):
         self.verse_select.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.verse_select.valueChanged.connect(self.select_verse)
         self.verse_select.setStyleSheet(
-            f'background-color: {self.app.colors["light"]};' 
-            f'color: {self.app.colors["dark"]};'
+            f'background-color: {self.ui.colors["light"]};' 
+            f'color: {self.ui.colors["dark"]};'
             'border: none;'
             'padding: 10px;'
             'border-radius: 5px;'

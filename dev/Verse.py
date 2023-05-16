@@ -36,7 +36,12 @@ class Verse(QWidget):
             [self.verse_label, self.verse, self.tat_label, self.tat],
             [self.pratipadam_label, self.pratipadam]
         ]
-        content_widget = self.ui.split(sections, widgets, mode="ttb")
+        section_styles = [
+            f"background-color: {self.ui.colors['sub']}; border-radius: 10px;",
+            ""
+        ]
+        ratios = [3, 2]
+        content_widget = self.ui.split(sections, widgets, mode="ttb", section_styles=section_styles, ratio=ratios)
 
         vbox.addWidget(content_widget)
         
