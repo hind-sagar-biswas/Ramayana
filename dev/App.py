@@ -1,5 +1,6 @@
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget
 from Verse import Verse
+from Form import Form
 
 class App(QMainWindow):
     def __init__(self):
@@ -44,13 +45,37 @@ class App(QMainWindow):
         self.selected_sarga_number = None
         self.selected_verse = None
         self.selected_verse_number = None
+        self.verse_widget = None
 
         self.setWindowTitle(self.title)
         self.setGeometry(50, 50, 800, 200)
         self.set_window()
+    
+    def set_window(self):
+        self.form = Form(self)
+        self.central_widget = QWidget()
+        self.central_layout = QVBoxLayout()
+        self.central_layout.addWidget(self.form)
+        self.central_widget.setLayout(self.central_layout)
+        self.setCentralWidget(self.central_widget)
+
+        self.form.select_kanda()
+        self.form.select_sarga()
+        self.form.select_verse()
+        return
+    
+    def update_window(self):
+        self.set_verse()
+        return
+
+    def set_verse(self):
+        if (self.verse_widget != None):
+            self.central_layout.removeWidget(self.verse_widget)
+        self.verse_widget = self.get_verse(self.selected_verse)
+        self.central_layout.addWidget(self.verse_widget)
 
     def get_verse(self, verse):    
-        verse_widget = Verse(verse)
+        verse_widget = self.verse_widget = Verse(verse)
         return verse_widget
 
     def fetch_kanda(self, kanda):

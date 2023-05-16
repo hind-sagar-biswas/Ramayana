@@ -1,7 +1,5 @@
-import os
-import json
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QComboBox, QSplitter, QSpinBox
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel
 
 
 class Verse(QWidget):
