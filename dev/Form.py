@@ -1,7 +1,7 @@
 import os
 import json
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QComboBox, QSplitter, QSpinBox, QScrollArea
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QComboBox, QSpinBox
 
 
 class Form(QWidget):
@@ -9,26 +9,8 @@ class Form(QWidget):
         super().__init__()
 
         self.app = app
-
+        self.ui = self.app.ui
         self.set_window()
-
-    def split(self, sections, sections_widgets, mode = "ltr"):
-        splitter = QSplitter()
-        splitter.setHandleWidth(1)
-        
-        for i in range(sections):
-            if (mode == "ltr"): 
-                layout = QHBoxLayout()
-            else: 
-                layout = QVBoxLayout()
-            for widget in sections_widgets[i]:
-                layout.addWidget(widget)
-            
-            splitter.addWidget(QWidget())
-            splitter.setStretchFactor(i, 1)
-            splitter.widget(i).setLayout(layout)
-        
-        return splitter
     
     def form_widget(self):
         sections = 3
@@ -37,16 +19,9 @@ class Form(QWidget):
             [self.sarga_select_label, self.sarga_select],
             [self.verse_select_label, self.verse_select]
         ]
-        form_widget = self.split(sections, widgets)
+        form_widget = self.ui.split(sections, widgets)
         form_widget.setStyleSheet(f'background: {self.app.colors["sub"]};' 'border-radius: 10px;')
         return form_widget
-    
-    def spin_box_widget(self):
-        spin_box = QSpinBox()
-        spin_box.setMinimum(1)  # Set the minimum value
-        spin_box.setMaximum(1)  # Set the maximum value
-        spin_box.setSingleStep(1)  # Set the step value
-        return spin_box
 
     def set_window(self):
         # main Layout
@@ -68,7 +43,7 @@ class Form(QWidget):
         
         self.kanda_select.currentIndexChanged.connect(self.select_kanda)
         ## SARGA
-        self.sarga_select = self.spin_box_widget()
+        self.sarga_select = self.ui.spin_box_widget()
         self.sarga_select.valueChanged.connect(self.select_sarga)
         self.sarga_select.setStyleSheet(
             f'background-color: {self.app.colors["light"]};' 
@@ -79,7 +54,7 @@ class Form(QWidget):
         )
         self.sarga_select_label = QLabel('SARGA:', self)
         ## VERSE
-        self.verse_select = self.spin_box_widget()
+        self.verse_select = self.ui.spin_box_widget()
         self.verse_select.valueChanged.connect(self.select_verse)
         self.verse_select.setStyleSheet(
             f'background-color: {self.app.colors["light"]};' 

@@ -1,6 +1,6 @@
 # Valmiki Ramayana Reader
 
-A python GUI reader for Valmiki Ramayana with Sanskrit Slokas and English meanings with Sloka breakdowns.
+A python GUI reader for Valmiki Ramayana with Sanskrit Slokas and English meanings with Sloka **breakdowns**.
 
 ## Preface
 

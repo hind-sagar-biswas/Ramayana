@@ -2,19 +2,15 @@ from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget
 from PyQt5.QtCore import Qt
 from Verse import Verse
 from Form import Form
+from Ui import UI
 
 class App(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        self.ui = UI()
         self.title = 'Valmiki Ramayana'
-        self.colors = {
-            "dark": "#333333",
-            "light": "white",
-            "main": "#99506d",
-            "sub": "#cf605f",
-            "sub_light": "#fe994c"
-        }
+        self.colors = self.ui.colors
         self.kandas = {
             'BALA': {
                 'sarga_count': 77,
@@ -49,10 +45,7 @@ class App(QMainWindow):
         self.verse_widget = None
 
         self.setWindowTitle(self.title)
-        self.setGeometry(50, 50, 800, 200)
-        self.setStyleSheet(
-            "max-width: 900px;"
-        )
+        self.setGeometry(self.ui.x, self.ui.y, self.ui.width, self.ui.height)
         self.set_window()
     
     def set_window(self):
