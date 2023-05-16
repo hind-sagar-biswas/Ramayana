@@ -16,16 +16,19 @@ class Verse(QWidget):
         vbox = QVBoxLayout()
 
         self.verse_label = QLabel('Verse:', self)
+        self.verse_label.setStyleSheet(f"color: {self.ui.colors['heading']};")
         self.verse = QLabel('', self)
         self.verse_label.setFont(self.ui.get_font('h3'))
         self.verse.setFont(self.ui.get_font('verse'))
 
         self.pratipadam_label = QLabel('Pratipadam:', self)
+        self.pratipadam_label.setStyleSheet(f"color: {self.ui.colors['heading']};")
         self.pratipadam = QLabel('', self)
         self.pratipadam_label.setFont(self.ui.get_font('h3'))
         self.pratipadam.setFont(self.ui.get_font('p'))
 
         self.tat_label = QLabel('Meaning:', self)
+        self.tat_label.setStyleSheet(f"color: {self.ui.colors['heading']};")
         self.tat = QLabel('', self)
         self.tat.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.tat_label.setFont(self.ui.get_font('h3'))

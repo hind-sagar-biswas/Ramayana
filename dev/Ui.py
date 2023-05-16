@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QComboBox, QSplitter, QSpinBox, QScrollArea
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSplitter, QSpinBox
 
 class UI(QWidget):
     def __init__(self):
@@ -12,18 +12,20 @@ class UI(QWidget):
                 "light": "white",
                 "main": "#111111",
                 "sub": "#333333",
-                "sub_light": "#fe994c"
+                "sub_light": "#fe994c",
+                "heading": "#ccaa35"
             },
             "peach": {
                 "dark": "#333333",
                 "light": "white",
                 "main": "#99506d",
                 "sub": "#cf605f",
-                "sub_light": "#fe994c"
+                "sub_light": "#fe994c",
+                "heading": "white"  
             }
         }
 
-        self.colors = self.themes["peach"]
+        self.colors = self.themes["dark"]
         self.x = 100
         self.y = 100
         self.width = 1100

@@ -69,7 +69,7 @@ class App(QMainWindow):
     
     def get_banner(self):
         banner = QLabel(self)
-        banner_image = QPixmap('./images/ramayana.jpg')
+        banner_image = QPixmap('./images/ramayana.png')
         banner.setPixmap(banner_image)
         banner.setAlignment(Qt.AlignCenter)
         return banner
