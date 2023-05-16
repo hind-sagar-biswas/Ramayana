@@ -1,64 +1,59 @@
-from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel
+from Ui import UI
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSizePolicy
 
 
 class Verse(QWidget):
     def __init__(self, verse):
         super().__init__()
 
+        self.ui = UI()
         self.selected_verse = verse
         self.set_widget()
         self.set_content()
-    
-    def get_font(self, tag):
-        font = QFont()
-        if 'h' in tag:
-            font.setBold(True) 
-        match tag:
-            case 'verse':
-                font.setPointSize(13)
-                font.setFamily('Kalam Regular')
-            case 'p':
-                font.setPointSize(13)
-            case 'h1':
-                font.setPointSize(17)
-            case 'h2':
-                font.setPointSize(15)
-            case 'h3':
-                font.setPointSize(14)
-        return font
 
     def set_widget(self):
         # main Layout
         vbox = QVBoxLayout()
 
         self.verse_label = QLabel('Verse:', self)
+        self.verse_label.setStyleSheet(f"color: {self.ui.colors['heading']};")
         self.verse = QLabel('', self)
-        self.verse_label.setFont(self.get_font('h3'))
-        self.verse.setFont(self.get_font('verse'))
+        self.verse_label.setFont(self.ui.get_font('h3'))
+        self.verse.setFont(self.ui.get_font('verse'))
 
         self.pratipadam_label = QLabel('Pratipadam:', self)
+        self.pratipadam_label.setStyleSheet(f"color: {self.ui.colors['heading']};")
         self.pratipadam = QLabel('', self)
-        self.pratipadam_label.setFont(self.get_font('h3'))
-        self.pratipadam.setFont(self.get_font('p'))
+        self.pratipadam_label.setFont(self.ui.get_font('h3'))
+        self.pratipadam.setFont(self.ui.get_font('p'))
 
         self.tat_label = QLabel('Meaning:', self)
+        self.tat_label.setStyleSheet(f"color: {self.ui.colors['heading']};")
         self.tat = QLabel('', self)
-        self.tat_label.setFont(self.get_font('h3'))
-        self.tat.setFont(self.get_font('p'))
+        self.tat.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.tat_label.setFont(self.ui.get_font('h3'))
+        self.tat.setFont(self.ui.get_font('p'))
 
-        vbox.addWidget(self.verse_label)
-        vbox.addWidget(self.verse)
-        vbox.addWidget(self.pratipadam_label)
-        vbox.addWidget(self.pratipadam)
-        vbox.addWidget(self.tat_label)
-        vbox.addWidget(self.tat)
+        sections = 2
+        widgets = [
+            [self.verse_label, self.verse, self.tat_label, self.tat],
+            [self.pratipadam_label, self.pratipadam]
+        ]
+        section_styles = [
+            f"background-color: {self.ui.colors['sub']}; border-radius: 10px;",
+            ""
+        ]
+        ratios = [3, 2]
+        content_widget = self.ui.split(sections, widgets, mode="ttb", section_styles=section_styles, ratio=ratios)
+
+        vbox.addWidget(content_widget)
         
         self.setLayout(vbox)
 
     def set_content(self):
         sloka = self.selected_verse["SanSloka"]
-        pratipada = ';\n'.join(self.selected_verse["pratipada"].split(';'))
+        pratipada_list = list(map(lambda x: x.strip(), self.selected_verse["pratipada"].split(';')))
+        pratipada = ';\n'.join(pratipada_list)
         tat = self.selected_verse["tat"]
 
         self.verse.setText(f'{sloka}')

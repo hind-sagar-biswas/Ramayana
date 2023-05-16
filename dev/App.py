@@ -1,20 +1,19 @@
-from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget
+from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QLabel
+from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtCore import Qt
+from Bookmark import Bookmark
 from Verse import Verse
 from Form import Form
+from Ui import UI
 
 class App(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        self.ui = UI()
+        self.bookmark = Bookmark()
         self.title = 'Valmiki Ramayana'
-        self.colors = {
-            "dark": "#333333",
-            "light": "white",
-            "main": "#99506d",
-            "sub": "#cf605f",
-            "sub_light": "#fe994c"
-        }
+        self.colors = self.ui.colors
         self.kandas = {
             'BALA': {
                 'sarga_count': 77,
@@ -49,28 +48,33 @@ class App(QMainWindow):
         self.verse_widget = None
 
         self.setWindowTitle(self.title)
-        self.setGeometry(50, 50, 800, 200)
-        self.setStyleSheet(
-            "max-width: 900px;"
-        )
+        icon = QIcon("./images/favicon.ico")
+        self.setWindowIcon(icon)
+        self.setGeometry(self.ui.x, self.ui.y, self.ui.width, self.ui.height)
         self.set_window()
     
     def set_window(self):
+        self.banner = self.get_banner()
         self.form = Form(self)
         self.central_widget = QWidget()
 
         self.central_layout = QVBoxLayout()
         self.central_layout.setAlignment(Qt.AlignTop)
+        self.central_layout.addWidget(self.banner)
         self.central_layout.addWidget(self.form)
 
         self.central_widget.setLayout(self.central_layout)
         self.setCentralWidget(self.central_widget)
-        self.central_layout.addStretch()
 
-        self.form.select_kanda()
-        self.form.select_sarga()
-        self.form.select_verse()
+        self.form.open_last_read()
         return
+    
+    def get_banner(self):
+        banner = QLabel(self)
+        banner_image = QPixmap('./images/ramayana.png')
+        banner.setPixmap(banner_image)
+        banner.setAlignment(Qt.AlignCenter)
+        return banner
     
     def update_window(self):
         self.set_verse()
