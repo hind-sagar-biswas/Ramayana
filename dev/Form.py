@@ -1,7 +1,7 @@
 import os
 import json
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QComboBox, QSpinBox
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QComboBox, QSizePolicy
 
 
 class Form(QWidget):
@@ -31,6 +31,7 @@ class Form(QWidget):
         ## KANDA
         self.kanda_select_label = QLabel('KANDA:', self)
         self.kanda_select = QComboBox(self)
+        self.kanda_select.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.kanda_select.setStyleSheet(
             f'background-color: {self.app.colors["light"]};' 
             f'color: {self.app.colors["dark"]};'
@@ -44,6 +45,7 @@ class Form(QWidget):
         self.kanda_select.currentIndexChanged.connect(self.select_kanda)
         ## SARGA
         self.sarga_select = self.ui.spin_box_widget()
+        self.sarga_select.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.sarga_select.valueChanged.connect(self.select_sarga)
         self.sarga_select.setStyleSheet(
             f'background-color: {self.app.colors["light"]};' 
@@ -55,6 +57,7 @@ class Form(QWidget):
         self.sarga_select_label = QLabel('SARGA:', self)
         ## VERSE
         self.verse_select = self.ui.spin_box_widget()
+        self.verse_select.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.verse_select.valueChanged.connect(self.select_verse)
         self.verse_select.setStyleSheet(
             f'background-color: {self.app.colors["light"]};' 

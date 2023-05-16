@@ -6,13 +6,24 @@ class UI(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.colors = {
-            "dark": "#333333",
-            "light": "white",
-            "main": "#99506d",
-            "sub": "#cf605f",
-            "sub_light": "#fe994c"
+        self.themes = {
+            "dark": {
+                "dark": "#333333",
+                "light": "white",
+                "main": "#111111",
+                "sub": "#333333",
+                "sub_light": "#fe994c"
+            },
+            "peach": {
+                "dark": "#333333",
+                "light": "white",
+                "main": "#99506d",
+                "sub": "#cf605f",
+                "sub_light": "#fe994c"
+            }
         }
+
+        self.colors = self.themes["peach"]
         self.x = 100
         self.y = 100
         self.width = 1100

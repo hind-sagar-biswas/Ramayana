@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget
+from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QLabel
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
 from Verse import Verse
 from Form import Form
@@ -49,11 +50,13 @@ class App(QMainWindow):
         self.set_window()
     
     def set_window(self):
+        self.banner = self.get_banner()
         self.form = Form(self)
         self.central_widget = QWidget()
 
         self.central_layout = QVBoxLayout()
         self.central_layout.setAlignment(Qt.AlignTop)
+        self.central_layout.addWidget(self.banner)
         self.central_layout.addWidget(self.form)
 
         self.central_widget.setLayout(self.central_layout)
@@ -63,6 +66,13 @@ class App(QMainWindow):
         self.form.select_sarga()
         self.form.select_verse()
         return
+    
+    def get_banner(self):
+        banner = QLabel(self)
+        banner_image = QPixmap('./images/ramayana.jpg')
+        banner.setPixmap(banner_image)
+        banner.setAlignment(Qt.AlignCenter)
+        return banner
     
     def update_window(self):
         self.set_verse()

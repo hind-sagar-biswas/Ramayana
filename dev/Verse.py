@@ -1,5 +1,5 @@
 from Ui import UI
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSizePolicy
 
 
 class Verse(QWidget):
@@ -27,6 +27,7 @@ class Verse(QWidget):
 
         self.tat_label = QLabel('Meaning:', self)
         self.tat = QLabel('', self)
+        self.tat.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.tat_label.setFont(self.ui.get_font('h3'))
         self.tat.setFont(self.ui.get_font('p'))
 
@@ -43,7 +44,8 @@ class Verse(QWidget):
 
     def set_content(self):
         sloka = self.selected_verse["SanSloka"]
-        pratipada = ';\n'.join(self.selected_verse["pratipada"].split(';'))
+        pratipada_list = list(map(lambda x: x.strip(), self.selected_verse["pratipada"].split(';')))
+        pratipada = ';\n'.join(pratipada_list)
         tat = self.selected_verse["tat"]
 
         self.verse.setText(f'{sloka}')
