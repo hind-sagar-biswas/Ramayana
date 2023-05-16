@@ -58,7 +58,6 @@ class App(QMainWindow):
 
         self.central_widget.setLayout(self.central_layout)
         self.setCentralWidget(self.central_widget)
-        self.central_layout.addStretch()
 
         self.form.select_kanda()
         self.form.select_sarga()

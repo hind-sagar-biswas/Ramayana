@@ -15,7 +15,7 @@ class UI(QWidget):
         }
         self.x = 100
         self.y = 100
-        self.width = 800
+        self.width = 1100
         self.height = 200
 
     def get_font(self, tag):

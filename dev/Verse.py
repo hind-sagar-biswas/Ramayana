@@ -30,12 +30,14 @@ class Verse(QWidget):
         self.tat_label.setFont(self.ui.get_font('h3'))
         self.tat.setFont(self.ui.get_font('p'))
 
-        vbox.addWidget(self.verse_label)
-        vbox.addWidget(self.verse)
-        vbox.addWidget(self.pratipadam_label)
-        vbox.addWidget(self.pratipadam)
-        vbox.addWidget(self.tat_label)
-        vbox.addWidget(self.tat)
+        sections = 2
+        widgets = [
+            [self.verse_label, self.verse, self.tat_label, self.tat],
+            [self.pratipadam_label, self.pratipadam]
+        ]
+        content_widget = self.ui.split(sections, widgets, mode="ttb")
+
+        vbox.addWidget(content_widget)
         
         self.setLayout(vbox)
 
