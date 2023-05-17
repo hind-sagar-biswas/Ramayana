@@ -12,7 +12,7 @@ class App(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.ui = UI()
+        self.ui = UI(self)
         self.reader = Read()
         self.bookmark = Bookmark()
         self.title = 'Valmiki Ramayana'

@@ -48,25 +48,11 @@ class Form(QWidget):
         self.sarga_select = self.ui.spin_box_widget()
         self.sarga_select.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.sarga_select.valueChanged.connect(self.select_sarga)
-        self.sarga_select.setStyleSheet(
-            f'background-color: {self.ui.colors["light"]};' 
-            f'color: {self.ui.colors["dark"]};'
-            'border: none;'
-            'padding: 10px;'
-            'border-radius: 5px;'
-        )
         self.sarga_select_label = QLabel('SARGA:', self)
         ## VERSE
         self.verse_select = self.ui.spin_box_widget()
         self.verse_select.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.verse_select.valueChanged.connect(self.select_verse)
-        self.verse_select.setStyleSheet(
-            f'background-color: {self.ui.colors["light"]};' 
-            f'color: {self.ui.colors["dark"]};'
-            'border: none;'
-            'padding: 10px;'
-            'border-radius: 5px;'
-        )
         self.verse_select_label = QLabel('VERSE:', self)
 
     

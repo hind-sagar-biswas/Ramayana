@@ -16,6 +16,14 @@ class Toolbar(QToolBar):
         read_tool = QAction('Read aloud', self)
         read_tool.triggered.connect(self.initiate_reading)
         self.addAction(read_tool)
+
+        # stop tool
+        stop_tool = QAction('Stop', self)
+        stop_tool.triggered.connect(self.stop_reading)
+        self.addAction(stop_tool)
         
     def initiate_reading(self):
        self.reader.read()
+
+    def stop_reading(self):
+       self.reader.stop()

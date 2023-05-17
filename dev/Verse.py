@@ -61,7 +61,7 @@ class Verse(QWidget):
         self.pratipadam.setText(pratipada)
         self.tat.setText(tat)
 
-        self.reader.renew(tat)
+        self.reader.set_text(tat)
         
         self.pratipadam.setWordWrap(True)
         self.tat.setWordWrap(True)
