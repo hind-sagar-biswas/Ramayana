@@ -1,13 +1,13 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSizePolicy
-from Read import Read
-from Ui import UI
 
 
 class Verse(QWidget):
-    def __init__(self, verse):
+    def __init__(self, app, verse):
         super().__init__()
 
-        self.ui = UI()
+        self.app = app
+        self.ui = self.app.ui
+        self.reader = self.app.reader
         self.selected_verse = verse
         self.set_widget()
         self.set_content()
@@ -15,8 +15,6 @@ class Verse(QWidget):
     def set_widget(self):
         # main Layout
         vbox = QVBoxLayout()
-
-        self.reader = Read()
 
         self.verse_label = QLabel('Verse:', self)
         self.verse_label.setStyleSheet(f"color: {self.ui.colors['heading']};")
@@ -40,7 +38,7 @@ class Verse(QWidget):
         sections = 2
         widgets = [
             [self.verse_label, self.verse, self.tat_label, self.tat],
-            [self.reader, self.pratipadam_label, self.pratipadam]
+            [self.pratipadam_label, self.pratipadam]
         ]
         section_styles = [
             f"background-color: {self.ui.colors['sub']}; border-radius: 10px;",
@@ -62,7 +60,8 @@ class Verse(QWidget):
         self.verse.setText(sloka)
         self.pratipadam.setText(pratipada)
         self.tat.setText(tat)
-        self.reader.set_text(tat)
+
+        self.reader.renew(tat)
         
         self.pratipadam.setWordWrap(True)
         self.tat.setWordWrap(True)

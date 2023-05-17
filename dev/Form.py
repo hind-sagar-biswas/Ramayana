@@ -10,6 +10,7 @@ class Form(QWidget):
 
         self.app = app
         self.ui = self.app.ui
+
         self.set_window()
     
     def form_widget(self):
