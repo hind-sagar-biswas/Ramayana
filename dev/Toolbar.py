@@ -18,9 +18,9 @@ class Toolbar(QToolBar):
         self.addAction(read_tool)
 
         # stop tool
-        stop_tool = QAction('Stop', self)
-        stop_tool.triggered.connect(self.stop_reading)
-        self.addAction(stop_tool)
+        # stop_tool = QAction('Stop', self)
+        # stop_tool.triggered.connect(self.stop_reading)
+        # self.addAction(stop_tool)
         
     def initiate_reading(self):
        self.reader.read()
