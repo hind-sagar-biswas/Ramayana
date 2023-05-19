@@ -1,3 +1,6 @@
 venv/
 __pycache__/
 cache/
+build/
+dist/
+ramayana_dist_win.rar

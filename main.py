@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-DEBUG = 1
+DEBUG = 0
 
 loc = "src"
 if DEBUG: loc = "dev"

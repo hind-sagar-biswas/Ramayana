@@ -3,8 +3,10 @@ from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSplitter, QSpinBox
 
 class UI(QWidget):
-    def __init__(self):
+    def __init__(self, app):
         super().__init__()
+
+        self.app = app
 
         self.themes = {
             "dark": {
@@ -30,6 +32,8 @@ class UI(QWidget):
         self.y = 100
         self.width = 1100
         self.height = 200
+
+        # self.set_styles()
 
     def get_font(self, tag):
         font = QFont()
@@ -76,4 +80,11 @@ class UI(QWidget):
         spin_box.setMinimum(1)  # Set the minimum value
         spin_box.setMaximum(1)  # Set the maximum value
         spin_box.setSingleStep(1)  # Set the step value
+        spin_box.setStyleSheet(
+            f'background-color: {self.colors["light"]};' 
+            f'color: {self.colors["dark"]};'
+            'border: none;'
+            'padding: 10px;'
+            'border-radius: 5px;'
+        )
         return spin_box

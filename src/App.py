@@ -2,15 +2,18 @@ from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QLabel
 from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtCore import Qt
 from Bookmark import Bookmark
+from Toolbar import Toolbar
 from Verse import Verse
 from Form import Form
+from Read import Read
 from Ui import UI
 
 class App(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.ui = UI()
+        self.ui = UI(self)
+        self.reader = Read()
         self.bookmark = Bookmark()
         self.title = 'Valmiki Ramayana'
         self.colors = self.ui.colors
@@ -56,6 +59,7 @@ class App(QMainWindow):
     def set_window(self):
         self.banner = self.get_banner()
         self.form = Form(self)
+        self.toolbar = Toolbar(self)
         self.central_widget = QWidget()
 
         self.central_layout = QVBoxLayout()
@@ -64,6 +68,8 @@ class App(QMainWindow):
         self.central_layout.addWidget(self.form)
 
         self.central_widget.setLayout(self.central_layout)
+
+        self.addToolBar(self.toolbar)
         self.setCentralWidget(self.central_widget)
 
         self.form.open_last_read()
@@ -86,8 +92,8 @@ class App(QMainWindow):
         self.verse_widget = self.get_verse(self.selected_verse)
         self.central_layout.addWidget(self.verse_widget)
 
-    def get_verse(self, verse):    
-        verse_widget = self.verse_widget = Verse(verse)
+    def get_verse(self, verse):
+        verse_widget = self.verse_widget = Verse(self, verse)
         return verse_widget
 
     def fetch_kanda(self, kanda):

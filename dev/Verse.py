@@ -1,12 +1,13 @@
-from Ui import UI
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSizePolicy
 
 
 class Verse(QWidget):
-    def __init__(self, verse):
+    def __init__(self, app, verse):
         super().__init__()
 
-        self.ui = UI()
+        self.app = app
+        self.ui = self.app.ui
+        self.reader = self.app.reader
         self.selected_verse = verse
         self.set_widget()
         self.set_content()
@@ -56,9 +57,11 @@ class Verse(QWidget):
         pratipada = ';\n'.join(pratipada_list)
         tat = self.selected_verse["tat"]
 
-        self.verse.setText(f'{sloka}')
-        self.pratipadam.setText(f'{pratipada}')
-        self.tat.setText(f'{tat}')
+        self.verse.setText(sloka)
+        self.pratipadam.setText(pratipada)
+        self.tat.setText(tat)
+
+        self.reader.set_text(tat)
         
         self.pratipadam.setWordWrap(True)
         self.tat.setWordWrap(True)
