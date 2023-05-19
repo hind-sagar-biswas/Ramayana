@@ -8,10 +8,28 @@ Ramayana is one of the epics and a part of history of Sanatana Dharma (Hindu rel
 
 So I present you *the **original** Valmiki Ramayana with Sanskrit Slokas, Meanings and more...*
 
+## Installation
+
+1. First download / clone the repository
+
+   ```terminal
+   got clone https://github.com/hind-sagar-biswas/Ramayana.git
+   ```
+
+2. install all the packages from `requirements.txt`
+3. run the following command in terminal
+
+   ```terminal
+   pyinstaller --noconsole --icon="./src/images/logo.ico" --add-data "./src/images;images" --add-data "./src/fonts;fonts" --add-data "./src/book;book" "./src/main.py"
+   ```
+
+4. After the installation finishes, you'll find the executable file in `.\dist\main\` directory as `main.exe`
+
 ## Used Packages
 
 1. PyQt5
 2. selenium
+3. pyttsx3
 
 ### Disclaimer
 
