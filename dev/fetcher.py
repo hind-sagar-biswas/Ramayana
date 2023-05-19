@@ -91,9 +91,7 @@ def fetch_verses(sarga_list, save_file_name):
     browser = webdriver.Chrome(options=chrome_options)
 
     save_to_file(save_file_name, '[\n')
-    sarga_count = 0
-    for sarga in tqdm(sarga_list):
-        sarga_count += 1
+    for sarga_count, sarga in tqdm(enumerate(sarga_list, start=1)):
         result = fetch_verse_list(sarga, browser)
         save_to_file(save_file_name, result)
         if (sarga_count < len(sarga_list)): save_to_file(save_file_name, ',\n')
@@ -112,10 +110,8 @@ def main():
         'SUNDARA': 68,
         'YUDDHA': 128
     }
-    for kanda in KANDA_LIST:
+    for kanda, SARGA_COUNT in KANDA_LIST.items():
         FILE_NAME = f'VALMIKI_RAMAYANA__{kanda}_KANDA'
-        SARGA_COUNT = KANDA_LIST[kanda]
-
         print(f'$ SELCTED -> {kanda} KANDA ({SARGA_COUNT})')
         print(f'\tConstructing URLS:\n')
         sarga_list = create_url_list(kanda, SARGA_COUNT)

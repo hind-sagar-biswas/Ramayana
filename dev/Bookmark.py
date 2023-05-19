@@ -44,15 +44,13 @@ class Bookmark():
         return [read[0], int(read[1]), int(read[2])]
 
     def retrieve(self):
-        # retrieve last read
-        last_read = self.fetch_content(self.last_read_file)
-        if not last_read: self.write_content(self.last_read_file, self.last_read)
-        else: self.last_read = last_read
+        if last_read := self.fetch_content(self.last_read_file):
+            self.last_read = last_read
 
-        #retrieve bookmarks
-        bookmarks = self.fetch_content(self.bookmarks_file)
-        if not bookmarks: self.write_content(self.bookmarks_file, "\n".join(self.bookmarks))
-        else: self.bookmarks = bookmarks.split("\n")
+        elif not last_read: self.write_content(self.last_read_file, self.last_read)
+        if bookmarks := self.fetch_content(self.bookmarks_file):
+            self.bookmarks = bookmarks.split("\n")
+        elif not bookmarks: self.write_content(self.bookmarks_file, "\n".join(self.bookmarks))
         return
     
     def add(self):

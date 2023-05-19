@@ -64,10 +64,9 @@ class Read(QWidget):
         self.running = True
 
     def stop(self):
-        if self.running:
-            if self.worker.isRunning():
-                self.worker.engine.stop()
-                self.worker.engine.endLoop()
+        if self.running and self.worker.isRunning():
+            self.worker.engine.stop()
+            self.worker.engine.endLoop()
         self.running = False
 
     def on_finished(self):

@@ -1,6 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QApplication, QAction, QLabel, QToolBar
-from PyQt5.QtGui import QIcon
-import sys
+from PyQt5.QtWidgets import QAction, QToolBar
 
 class Toolbar(QToolBar):
     def __init__(self, app):

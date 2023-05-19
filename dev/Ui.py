@@ -56,23 +56,19 @@ class UI(QWidget):
     def split(self, sections, sections_widgets, mode = "ltr", section_styles = None, ratio = None):
         splitter = QSplitter()
         splitter.setHandleWidth(1)
-        
+
         for i in range(sections):
-            if (mode == "ltr"): 
-                layout = QHBoxLayout()
-            else: 
-                layout = QVBoxLayout()
+            layout = QHBoxLayout() if (mode == "ltr") else QVBoxLayout()
             for widget in sections_widgets[i]:
                 layout.addWidget(widget)
-            
-            if ratio == None: r = 1
-            else: r = ratio[i]
+
+            r = 1 if ratio is None else ratio[i]
             splitter.addWidget(QWidget())
             splitter.setStretchFactor(i, r)
             splitter.widget(i).setLayout(layout)
             if section_styles != None:
                 splitter.widget(i).setStyleSheet(f"QWidget {{ {section_styles[i]} }}")
-        
+
         return splitter
     
     def spin_box_widget(self):
