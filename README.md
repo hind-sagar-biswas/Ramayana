@@ -8,6 +8,15 @@ Ramayana is one of the epics and a part of history of Sanatana Dharma (Hindu rel
 
 So I present you *the **original** Valmiki Ramayana with Sanskrit Slokas, Meanings and more...*
 
+## Download Installed
+
+To download the installed executable to be able to run the application directly, download the `.rar` file from the give link below
+
+* [Google Drive](https://drive.google.com/file/d/1omxVtqg04Qppl0KbiE7EPNSKKMoJw14F/view?usp=share_link)
+* [Mega](https://mega.nz/file/tXcmyahS#X0Nvz8XMJRi0O3JQNQDEMYjdIEU713hJUClBOw7XwWc)
+
+Then extract it and you'll find a directory called `main` in it. Inside that directory the executable file `main.exe` is present.
+
 ## Installation
 
 1. First download / clone the repository
