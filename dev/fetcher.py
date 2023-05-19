@@ -50,7 +50,7 @@ def fetch_verse_list(url, browser):
         const verseList = fetchVerses(getVerseCounts());
         return JSON.stringify(verseList);
         """)
-    except:
+    except Exception:
         result = '{"status": "Not Found"}'
 
     return result

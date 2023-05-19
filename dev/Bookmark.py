@@ -19,7 +19,7 @@ class Bookmark():
 
             with open(file_path, 'r', encoding='utf-8') as infile:
                 data = infile.read()
-        except:
+        except Exception:
             data = False
         return data
     
@@ -30,7 +30,7 @@ class Bookmark():
         try:
             with open(file_path, mode, encoding='utf-8') as outfile:
                 outfile.write(content)
-        except:
+        except Exception:
             subprocess.run(["mkdir", "cache"], shell=True)
             self.write_content(file_name, content)
 
